@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uber form</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<form action="javascript:createSurvey()" class="form-horizontal">
+			<h2>Nieuwe vragenlijst</h2>
+			<div class="col-sm-12" id="questionList">
+			
+			</div>
+			<div class="row">
+				<div class="col-sm-4">
+				<select id="questionSelector" class="form-control dropdown">
+					<option value="image">Foto's</option>
+					<option value="video">Video's</option>
+					<option value="audio">Audio</option>
+					<option value="open">Open</option>
+					<option value="multipleChoice">Meerkeuze (1 antwoord)</option>
+					<option value="multipleSelect">Meerkeuze (meerdere antwoorden)</option>
+				</select>
+				</div>
+				
+				<button class="btn btn-info col-sm-2" onclick="javascript:addQuestion()">create question</button>
+			</div>
+			<hr class="half-rule">
+			
+			
+			<input type="submit" class="btn btn-primary" value="create survey"/>
+		</form>
+	</div>
+</body>
+</html>
