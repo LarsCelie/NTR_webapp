@@ -11,11 +11,9 @@ function addQuestion() {
 	var sVraag = 'vraag';
 	var sType = 'type';
 	var sValue = 'value';
+	
 	var div = document.getElementById('questionList');
 	var questionType = document.getElementById('questionSelector').value;
-	var output = '';
-	
-	output += '<h4 id="' + sVraag + counter+ sType+ '">'+counter+ ': ' +questionType+'</h4>';
 	
 	var panel = document.createElement('div');
 	panel.setAttribute('class','panel panel-primary');
@@ -31,50 +29,125 @@ function addQuestion() {
 	panelHeader.appendChild(panelTitle);
 	
 	var panelBody = document.createElement('div');
-	panelBody.setAttribute('class', 'panel-body');
-	
-	
+	panelBody.setAttribute('class', 'panel-body');	
+	var input;
 	if(questionType == 'multipleSelect' || questionType == 'multipleChoice') {
-		
-		output += '<form id="'+sVraag+counter+sValue+'" class="form-horizontal">';
-		output += '<div class="row">';
-		output += '<label class="control-label col-sm-1">Vraag:</label>';
-		output += '<div class="col-sm-5">';
-		output += '<input type="text" class="form-control" placeholder="Vul hier je vraag in">';
-		output += '</div>';
-		output += '</div>';
-		
-		output += '<button onclick="addOption(this)">Voeg optie toe</button>';
-		output += '</form>';
-		
-		
-		
+		input = createQuestion(false);
 	} else {
+		input = createQuestion(true);
+	}
+	panelBody.appendChild(input);
+	panel.appendChild(panelBody);
+	div.appendChild(panel);
+}
+
+function createQuestion(normal) {
+	
+	var sVraag = 'vraag';
+	var sType = 'type';
+	var sValue = 'value';
+	
+	var div = document.createElement('div');
+	div.setAttribute('class','row');
+	
+	//attachment
+	var labelAttachment = document.createElement('label');
+	labelAttachment.setAttribute('class','control-label col-sm-1');
+	labelAttachment.innerHTML = "Illustratie:";
+	
+	var inputAttachmentDiv = document.createElement('div');
+	inputAttachmentDiv.setAttribute('class','col-sm-5');
+	
+	var inputAttachment = document.createElement('input');
+	inputAttachment.type = "file";
+	inputAttachment.accept = "file_extension|audio/*|video/*|image/*|media_type";
+	inputAttachment.placeholder = "Voeg uw bestand toe";
+	inputAttachmentDiv.appendChild(inputAttachment);
+	//attachment
+	
+	//question
+	var labelQuestion = document.createElement('label');
+	labelQuestion.setAttribute('class','control-label col-sm-1');
+	labelQuestion.innerHTML = "Vraag:";
+	
+	var inputDiv = document.createElement('div');
+	inputDiv.setAttribute('class','col-sm-5');
+	
+	var input = document.createElement('input');
+	input.type = "text";
+	input.setAttribute('class','form-control');
+	input.placeholder = "Vul hier de vraag in";
+	//question
+	
+//	div.appendChild(labelAttachment);
+//	div.appendChild(inputAttachmentDiv);
+//	
+//	div.appendChild(document.createElement('br'));
+	
+	div.appendChild(labelQuestion);
+	div.appendChild(inputDiv);
+	inputDiv.appendChild(input);
+	
+	
+	
+	if (normal) {
+		input.id = sVraag+counter+sValue;
 		
-		output += '<div class="row">';
-		output += '<label class="control-label col-sm-1">Vraag:</label>';
-		output += '<div class="col-sm-5">';
-		output += '<input type="text" id="'+sVraag+counter+sValue+'" class="form-control" placeholder="Vul hier je vraag in">';
-		output += '</div>';
-		output += '</div>';
+		return div;
+	} else {
+		var form = document.createElement('form');
+		form.id = sVraag+counter+sValue
+		form.setAttribute('class','form-horizontal');
+		form.action = "";
+		
+		form.appendChild(div);
+		
+		var optionDiv = document.createElement('div');
+		form.appendChild(optionDiv);
+		
+		var button = document.createElement('button');
+		button.type = "button";
+		button.onclick = addOption;
+		button.innerHTML = "Voeg optie toe";
+		button.setAttribute('class','btn btn-success');
+		
+		form.appendChild(button);
+		
+		return form;
 		
 	}
-	output += '<hr class="half-rule">';
 	
-	div.innerHTML += output;
 }
 
 function addOption(optionBtn) {
 	
-	var x = optionBtn.parentNode; //form
-	$(x).append('<div class="row">');
-	$(x).append('<label class="control-label col-sm-2">Optie: </label>');
-	$(x).append('<div class="col-sm-3">');
-	$(x).append('<input type="text" class="form-control" placeholder="Vul hier je optie in">');
+	var x = optionBtn.target.parentNode; //form
 	
+	var row = document.createElement('div');
+	row.setAttribute('class','row');
+	
+	var label = document.createElement('label');
+	label.setAttribute('class', 'control-label col-sm-2');
+	label.innerHTML = "Optie:";
+	
+	var inputDiv = document.createElement('div');
+	inputDiv.setAttribute('class','col-sm-3');
+	
+	var input = document.createElement('input');
+	input.type = "text";
+	input.setAttribute('class','form-control');
+	input.placeholder = "Vul hier je optie in";
+	row.appendChild(document.createElement('br'));
+	
+	row.appendChild(label);
+	row.appendChild(inputDiv);
+	inputDiv.appendChild(input);
+	
+	x.children[1].appendChild(row);
 }
 
 function createSurvey() {
+	
 	var json = {
 		'questions' : []
 	};
