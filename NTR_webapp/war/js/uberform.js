@@ -17,6 +17,23 @@ function addQuestion() {
 	
 	output += '<h4 id="' + sVraag + counter+ sType+ '">'+counter+ ': ' +questionType+'</h4>';
 	
+	var panel = document.createElement('div');
+	panel.setAttribute('class','panel panel-primary');
+	
+	var panelHeader = document.createElement('div');
+	panelHeader.setAttribute('class', 'panel-heading');		
+	panel.appendChild(panelHeader);
+	
+	var panelTitle = document.createElement('h1');
+	panelTitle.setAttribute('class', 'panel-title');
+	panelTitle.id = sVraag + counter + sType;
+	panelTitle.innerHTML = counter+ ': ' +questionType;
+	panelHeader.appendChild(panelTitle);
+	
+	var panelBody = document.createElement('div');
+	panelBody.setAttribute('class', 'panel-body');
+	
+	
 	if(questionType == 'multipleSelect' || questionType == 'multipleChoice') {
 		
 		output += '<form id="'+sVraag+counter+sValue+'" class="form-horizontal">';
@@ -29,6 +46,8 @@ function addQuestion() {
 		
 		output += '<button onclick="addOption(this)">Voeg optie toe</button>';
 		output += '</form>';
+		
+		
 		
 	} else {
 		
