@@ -214,10 +214,11 @@ function addOption(optionBtn, value) {
 
 function createSurvey() {
 	$.ajax({
-		url: "localhost:8080/NTR_application/Research/survey",
+		url: "http://localhost:8080/NTR_application/rest/Research/survey",
 		type: "PUT",
 		data: questions,
 		dataType: "json",
+		contentType: "application/json",
 		success: function(){
 			alert("survey toegevoegd!");
 		},
