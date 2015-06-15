@@ -16,3 +16,20 @@ function getOnderzoeken() {
 		}
 	});
 }
+
+
+function showResearchPanel(researchData){
+	var panel = createElement('div','panel panel-info');
+	//panel.id = researchData.id;
+	var panelHeader = createElement('div','panel-heading');
+	var headerTitle = createElement('h1','panel-title');
+	//headerTitle.innerHTML = researchData.name;
+	panelHeader.append(headerTitle);
+	
+	var panelBody = createElement('div','panel-body');
+	
+	
+	
+	panel.appendChild(panelHeader);
+	panel.appendChild(panelBody);
+}
