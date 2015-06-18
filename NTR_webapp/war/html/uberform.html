@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="container">
-		<form action="http://localhost:8080/NTR_Application/rest/survey"
+		<form action="http://localhost:8080/NTR_application/rest/survey" id="theUberForm"
 			enctype="multipart/form-data" method=post class="form-horizontal">
 			<h2>Nieuwe vragenlijst</h2>
 			<div class="panel panel-primary">
@@ -28,7 +28,7 @@
 							<label class="control-label col-sm-2">Naam:</label>
 							<div class="col-sm-4">
 								<input id="surveyName" type="text" class="form-control"
-									name="name" required />
+									name="name" placeholder="Naam van onderzoek" required />
 							</div>
 						</div>
 						<div class="form-group">
@@ -36,6 +36,13 @@
 							<div class="col-sm-4">
 								<input id="surveyStart" type="date" class="form-control"
 									name="begindate" placeholder="15/8/2015" required />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Einddatum:</label>
+							<div class="col-sm-4">
+								<input id="surveyEnd" type="date" class="form-control"
+									name="einddatum" placeholder="25/10/2015" required />
 							</div>
 						</div>
 						<div class="form-group">
@@ -64,7 +71,7 @@
 					</div>
 				</div>
 			</div>
-			<input type="submit" class="btn btn-primary" value="Maak vragenlijst" />
+			<input type="submit" onclick="javascript:sendSurvey()" class="btn btn-primary" value="Maak vragenlijst" />
 		</form>
 	</div>
 </body>

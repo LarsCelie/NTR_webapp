@@ -218,4 +218,11 @@ function deleteQuestion(WindowEvent){
 	questionContainer.removeChild(panel);
 }
 
+function sendSurvey(){
+	if (confirm('Maak forumulier?')){
+		var form = document.getElementById("theUberForm");
+		form.submit();
+	}
+}
+
 //row4 optionContent -> WindowEvent.target.parentNode.parentNode.parentNode.children[3].children.length
