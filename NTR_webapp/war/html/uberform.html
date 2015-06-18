@@ -5,39 +5,66 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Uber form</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/util.js"></script>
 <script src="../js/uberform.js"></script>
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 	<div class="container">
-		<form action="javascript:createSurvey()" class="form-horizontal">
+		<form action="http://localhost:8080/NTR_Application/rest/survey"
+			enctype="multipart/form-data" method=post class="form-horizontal">
 			<h2>Nieuwe vragenlijst</h2>
-			<div class="col-sm-12" id="questionListSaved">
-			
-			</div>
-			<div class="col-sm-12" id="questionList">
-			
-			</div>
-			<div class="row">
-				<div class="col-sm-4">
-				<select id="questionSelector" class="form-control dropdown">
-					<option value="image">Foto's</option>
-					<option value="video">Video's</option>
-					<option value="audio">Audio</option>
-					<option value="open">Open</option>
-					<option value="multipleChoice">Meerkeuze (1 antwoord)</option>
-					<option value="multipleSelect">Meerkeuze (meerdere antwoorden)</option>
-				</select>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h1 class="panel-title">Vragenlijst algemeen</h1>
 				</div>
-				
-				<button class="btn btn-info col-sm-2" onclick="javascript:addQuestion()">create question</button>
+				<div class="panel-body">
+					<div class="col-sm-12">
+						<input type="text" class="hidden" id="researchid" />
+						<div class="form-group">
+							<label class="control-label col-sm-2">Naam:</label>
+							<div class="col-sm-4">
+								<input id="surveyName" type="text" class="form-control"
+									name="name" required />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Begindatum:</label>
+							<div class="col-sm-4">
+								<input id="surveyStart" type="date" class="form-control"
+									name="begindate" placeholder="15/8/2015" required />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2">Einddatum:</label>
+							<div class="col-sm-4">
+								<input id="surveyEnd" type="date" class="form-control"
+									name="einddatum" placeholder="25/10/2015" required />
+							</div>
+						</div>
+						<button id='saveButton' type="button" class="btn btn-success"
+							onclick="javascript:saveSurveyDetails()">Bewaar</button>
+
+					</div>
+				</div>
 			</div>
-			<hr class="half-rule">
-			
-			
-			<input type="submit" class="btn btn-primary" value="create survey"/>
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h1 class="panel-title">Vragen</h1>
+				</div>
+				<div class="panel-body">
+					<div class="col-sm-12" id="Questions"></div>
+					
+					<div class="col-sm-12">
+						<button class="btn btn-info col-sm-2" type="button"
+							onclick="javascript:addQuestion()">Voeg een vraag toe</button>
+					</div>
+				</div>
+			</div>
+			<input type="submit" class="btn btn-primary" value="Maak vragenlijst" />
 		</form>
 	</div>
 </body>
