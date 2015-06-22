@@ -8,10 +8,15 @@ function setResearchId(){
 	var id = (research == null) ? 1 : research.id;
 	var element = document.getElementById("researchid");
 	element.value = id;
+	addQuestion();
+	var questionDiv = document.getElementById('Questions');
+	var formgroup = questionDiv.firstChild.lastChild.firstChild;
+	formgroup.removeChild(formgroup.lastChild);
 }
 
 function createTypeSelector(){
 	var select = createElement('select','form-control dropdown');
+	select.name = "questionType";
 	select.onchange = updateQuestionType;
 	var optionImage = createOption('image', "Foto's");
 	var optionVideo = createOption('video', "Video's");
@@ -49,6 +54,7 @@ function createQuestionPanel(){
 	var illustrationInputContainer = createElement('div','col-sm-6');
 	var illustrationInput = createElement('input','file');
 	illustrationInput.type = "file";
+	illustrationInput.name = "questionIllustrationFile";
 	
 	var deleteButton = createElement('button','btn btn-danger col-sm-1 col-sm-offset-2');
 	deleteButton.type = 'button';
@@ -84,6 +90,7 @@ function createQuestionPanel(){
 	var input = createElement('input','form-control');
 	input.type = "text";
 	input.required = true;
+	input.name = "questionValue";
 	
 	inputContainer.appendChild(input);
 	row3.appendChild(inputLabel)
@@ -131,6 +138,7 @@ function updateQuestionType(WindowEvent){
 			
 			var input = createElement('input','form-control');
 			input.type = "text";
+			input.name = "questionOption";
 			input.required = true;
 			inputContainer.appendChild(input);
 			
@@ -173,6 +181,7 @@ function addOption(WindowEvent){
 	
 	var input = createElement('input','form-control');
 	input.type = "text";
+	input.name = "questionOption";
 	input.required = true;
 	inputContainer.appendChild(input);
 	
@@ -219,9 +228,16 @@ function deleteQuestion(WindowEvent){
 }
 
 function sendSurvey(){
-	if (confirm('Maak forumulier?')){
-		var form = document.getElementById("theUberForm");
-		form.submit();
+	var surveyStart = document.getElementById('surveyStart');
+	var surveyEnd = document.getElementById('surveyEnd');
+	var regex = '^(((0[1-9]|[12]\d|3[01])\-(0[13578]|1[02])\-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\-(0[13456789]|1[012])\-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\-02\-((19|[2-9]\d)\d{2}))|(29\-02\-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$';
+	if (surveyStart.value.matches(regex) && surveyEnd.value.matches(regex)){
+		if (confirm('Weet je zeker dat je het formulier wilt aanmaken?')){
+			var form = document.getElementById("theUberForm");
+			form.submit();
+		}
+	} else {
+		alert("De datumvelden voldoen niet aan de correcte format: DD-MM-YYYY");
 	}
 }
 
