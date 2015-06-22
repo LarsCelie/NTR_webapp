@@ -228,17 +228,15 @@ function deleteQuestion(WindowEvent){
 }
 
 function sendSurvey(){
-	var surveyStart = document.getElementById('surveyStart');
-	var surveyEnd = document.getElementById('surveyEnd');
-	var regex = '^(((0[1-9]|[12]\d|3[01])\-(0[13578]|1[02])\-((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\-(0[13456789]|1[012])\-((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\-02\-((19|[2-9]\d)\d{2}))|(29\-02\-((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$';
-	if (surveyStart.value.matches(regex) && surveyEnd.value.matches(regex)){
+	var surveyStart = document.getElementById('surveyStart').value;
+	var surveyEnd = document.getElementById('surveyEnd').value;
+	if (isDate(surveyStart) && isDate(surveyEnd)){
 		if (confirm('Weet je zeker dat je het formulier wilt aanmaken?')){
 			var form = document.getElementById("theUberForm");
 			form.submit();
 		}
 	} else {
-		alert("De datumvelden voldoen niet aan de correcte format: DD-MM-YYYY");
+		alert("De datumvelden voldoen niet aan de correcte format (DD-MM-YYYY) of is een ongeldige datum.");
 	}
 }
 
-//row4 optionContent -> WindowEvent.target.parentNode.parentNode.parentNode.children[3].children.length
