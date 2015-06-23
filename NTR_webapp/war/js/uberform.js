@@ -122,6 +122,7 @@ function updateQuestionType(WindowEvent){
 	var button = WindowEvent.target;
 	var value = button.value; //question type
 	var row4 = button.parentNode.parentNode.parentNode.children[3]; //row4 has options for multiple answer questions
+	row4.innerHTML = "";
 	if (value === 'multipleChoice' || value ==='multipleSelect'){
 		var optionLabelContainer = createElement('div','form-group');
 		var optionLabel = createElement('label','control-label col-sm-3');
@@ -160,8 +161,6 @@ function updateQuestionType(WindowEvent){
 		row4.appendChild(optionLabelContainer);
 		row4.appendChild(optionContainer);
 		row4.appendChild(addOptionGroup);
-	} else {
-		row4.innerHTML = "";
 	}
 }
 
