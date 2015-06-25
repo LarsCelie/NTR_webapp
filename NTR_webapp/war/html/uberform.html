@@ -23,7 +23,7 @@
 				</div>
 				<div class="panel-body">
 					<div class="col-sm-12">
-						<input type="text" class="hidden" id="researchid" />
+						<input type="text" class="hidden" name="researchid" id="researchid" />
 						<div class="form-group">
 							<label class="control-label col-sm-2">Naam:</label>
 							<div class="col-sm-4">
@@ -35,21 +35,14 @@
 							<label class="control-label col-sm-2">Begindatum:</label>
 							<div class="col-sm-4">
 								<input id="surveyStart" type="date" class="form-control"
-									name="begindate" placeholder="15/8/2015" required />
+									name="begindate" placeholder="15-08-2015" maxlength="10" required />
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="control-label col-sm-2">Einddatum:</label>
 							<div class="col-sm-4">
 								<input id="surveyEnd" type="date" class="form-control"
-									name="einddatum" placeholder="25/10/2015" required />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-sm-2">Einddatum:</label>
-							<div class="col-sm-4">
-								<input id="surveyEnd" type="date" class="form-control"
-									name="einddatum" placeholder="25/10/2015" required />
+									name="einddatum" placeholder="25-10-2015" maxlength="10" required />
 							</div>
 						</div>
 						<button id='saveButton' type="button" class="btn btn-success"
@@ -71,7 +64,7 @@
 					</div>
 				</div>
 			</div>
-			<input type="submit" onclick="javascript:sendSurvey()" class="btn btn-primary" value="Maak vragenlijst" />
+			<input type="button" onclick="sendSurvey()" class="btn btn-primary" value="Maak vragenlijst" />
 		</form>
 	</div>
 </body>

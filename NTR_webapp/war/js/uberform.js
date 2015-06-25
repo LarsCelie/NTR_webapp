@@ -8,10 +8,15 @@ function setResearchId(){
 	var id = (research == null) ? 1 : research.id;
 	var element = document.getElementById("researchid");
 	element.value = id;
+	addQuestion();
+	var questionDiv = document.getElementById('Questions');
+	var formgroup = questionDiv.firstChild.lastChild.firstChild;
+	formgroup.removeChild(formgroup.lastChild);
 }
 
 function createTypeSelector(){
 	var select = createElement('select','form-control dropdown');
+	select.name = "questionType";
 	select.onchange = updateQuestionType;
 	var optionImage = createOption('image', "Foto's");
 	var optionVideo = createOption('video', "Video's");
@@ -49,6 +54,7 @@ function createQuestionPanel(){
 	var illustrationInputContainer = createElement('div','col-sm-6');
 	var illustrationInput = createElement('input','file');
 	illustrationInput.type = "file";
+	illustrationInput.name = "questionIllustrationFile";
 	
 	var deleteButton = createElement('button','btn btn-danger col-sm-1 col-sm-offset-2');
 	deleteButton.type = 'button';
@@ -84,6 +90,7 @@ function createQuestionPanel(){
 	var input = createElement('input','form-control');
 	input.type = "text";
 	input.required = true;
+	input.name = "questionValue";
 	
 	inputContainer.appendChild(input);
 	row3.appendChild(inputLabel)
@@ -115,6 +122,7 @@ function updateQuestionType(WindowEvent){
 	var button = WindowEvent.target;
 	var value = button.value; //question type
 	var row4 = button.parentNode.parentNode.parentNode.children[3]; //row4 has options for multiple answer questions
+	row4.innerHTML = "";
 	if (value === 'multipleChoice' || value ==='multipleSelect'){
 		var optionLabelContainer = createElement('div','form-group');
 		var optionLabel = createElement('label','control-label col-sm-3');
@@ -131,6 +139,7 @@ function updateQuestionType(WindowEvent){
 			
 			var input = createElement('input','form-control');
 			input.type = "text";
+			input.name = "questionOption";
 			input.required = true;
 			inputContainer.appendChild(input);
 			
@@ -152,8 +161,6 @@ function updateQuestionType(WindowEvent){
 		row4.appendChild(optionLabelContainer);
 		row4.appendChild(optionContainer);
 		row4.appendChild(addOptionGroup);
-	} else {
-		row4.innerHTML = "";
 	}
 }
 
@@ -173,6 +180,7 @@ function addOption(WindowEvent){
 	
 	var input = createElement('input','form-control');
 	input.type = "text";
+	input.name = "questionOption";
 	input.required = true;
 	inputContainer.appendChild(input);
 	
@@ -219,10 +227,15 @@ function deleteQuestion(WindowEvent){
 }
 
 function sendSurvey(){
-	if (confirm('Maak forumulier?')){
-		var form = document.getElementById("theUberForm");
-		form.submit();
+	var surveyStart = document.getElementById('surveyStart').value;
+	var surveyEnd = document.getElementById('surveyEnd').value;
+	if (isDate(surveyStart) && isDate(surveyEnd)){
+		if (confirm('Weet je zeker dat je het formulier wilt aanmaken?')){
+			var form = document.getElementById("theUberForm");
+			form.submit();
+		}
+	} else {
+		alert("De datumvelden voldoen niet aan de correcte format (DD-MM-YYYY) of is een ongeldige datum.");
 	}
 }
 
-//row4 optionContent -> WindowEvent.target.parentNode.parentNode.parentNode.children[3].children.length
