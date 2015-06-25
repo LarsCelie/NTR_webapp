@@ -6,7 +6,7 @@
 function getOnderzoeken() {
 	$.ajax({
 		type : 'GET',
-		url : 'http://92.109.48.222:7070/NTR_application/rest/research',
+		url : 'http://92.109.52.61:7070/NTR_application/rest/research',
 		success : function(data) {
 			researchesObject = data;
 			showResearches(data);
@@ -21,7 +21,7 @@ function getOnderzoeken() {
 function getSurveys(researchID) {
 	$.ajax({
 		type : 'GET',
-		url : 'http://92.109.48.222:7070/NTR_application/rest/survey/research/' + researchID,
+		url : 'http://92.109.52.61:7070/NTR_application/rest/survey/research/' + researchID,
 		success : function(data) {
 			console.log("hoi");
 			console.log(data);
@@ -38,7 +38,7 @@ function getSurveys(researchID) {
 function getResults(surveyID) {
 	$.ajax({
 		type : 'GET',
-		url :'http://92.109.48.222:7070/NTR_application/rest/answer/' + surveyID,
+		url :'http://92.109.52.61:7070/NTR_application/rest/answer/' + surveyID,
 		success : function(data) {
 			console.log(data);
 		},
@@ -70,8 +70,6 @@ function showResearches(researches) {
 			BDateLabel.innerHTML = 'Begin datum: ' + researches[i].beginDate;
 		var EDateLabel = createElement('label', 'control-label col-sm-8');
 			EDateLabel.innerHTML = 'Eind datum: ' + researches[i].endDate;
-//		var numberOfSurveys = createElement('label', 'control-label col-sm-8');
-//			numberOfSurveys.innerHTML = 'Aantal surveys: ' + researches[i].surveys.length;
 		var button = createElement('button', 'btn btn-success');
 		button.id = i;
 		button.innerHTML = 'Surveys';
@@ -91,7 +89,6 @@ function showResearches(researches) {
 		formGroup.appendChild(statusLabel);
 		formGroup.appendChild(BDateLabel);
 		formGroup.appendChild(EDateLabel);
-//		formGroup.appendChild(numberOfSurveys);
 		formGroup.appendChild(button);
 		panelBody.appendChild(formGroup);
 		container.appendChild(panelDiv);
@@ -132,7 +129,7 @@ function showSurveyPanels(surveysJson) {
 		button.addEventListener('click', function(event) {
 			var id = event.target.id;
 			console.log(id);
-			window.location.assign('http://92.109.48.222:7070/NTR_application/rest/answer/' + id);
+			window.location.assign('http://92.109.52.61:7070/NTR_application/rest/answer/' + id);
 			//getResults(id);
 		});
 		
@@ -146,4 +143,8 @@ function showSurveyPanels(surveysJson) {
 		panelBody.appendChild(formGroup);
 		container.appendChild(panelDiv);
 	}
+}
+
+function toUberform(){
+	window.location.assign('http://localhost:8888/html/uberform.html');
 }
