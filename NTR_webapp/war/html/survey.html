@@ -10,17 +10,57 @@
 	<script src="../js/onderzoeken.js"></script>
 	<script src="../js/util.js"></script>
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../css/heroic-features.css" rel="stylesheet">
 </head>
+
 <body onload="showSurveys()">
 	
-	<div class="container">
-		
-		<div>
-			<button class="btn btn-success" onclick="javascript:toUberform()">Maak nieuw vragenlijst</button>
+	<!-- Navigation -->
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Input webapp</a>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    <!-- Page content -->
+    <div class="container">
+    
+     	<!-- Jumbotron Header -->
+        <header class="jumbotron hero-spacer">
+            <h1><font color="#35acbc">Input webapp</font></h1>
+            <p>Maak hier een nieuwe survey aan of haal de resultaten op.</p>
+            <button class="btn btn-warning" onclick="javascript:toUberform()">Maak nieuw vragenlijst</button>
+        </header>
+
+        <hr>
+
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Surveys</h3>
+            </div>
+        </div>
+        
+        <div>
+			
 		</div>
-		<div id="surveys"></div>
 		
-	</div>
+		<div id="surveys" class="row text-center">
+		
+		</div>
+        
+   	</div>    
 	
 </body>
 </html>

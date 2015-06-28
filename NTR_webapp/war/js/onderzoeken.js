@@ -52,24 +52,12 @@ function getResults(surveyID) {
 var researchesObject = {};
 var research;
 
-// Function that creates panels for each research
+// Function that creates cards for each research
 function showResearches(researches) {
 	
 	var container = document.getElementById('onderzoeken');
 
 	for (i = 0; i < researches.length; i++) {
-//		var panelDiv = createElement('div', 'panel panel-primary');
-//		var panelHeading = createElement('div', 'panel-heading');
-//		var panelTitle = createElement('h3', 'panel-title');
-//			panelTitle.innerHTML = researches[i].name;
-//		var panelBody = createElement('div', 'panel-body');
-//		var formGroup = createElement('div', 'form-group');
-//		//var statusLabel = createElement('label', 'control-label col-sm-8');
-//		//	statusLabel.innerHTML = 'Status: ' + researches[i].status;
-//		var BDateLabel = createElement('label', 'control-label col-sm-8');
-//			BDateLabel.innerHTML = 'Begin datum: ' + researches[i].beginDate;
-//		var EDateLabel = createElement('label', 'control-label col-sm-8');
-//			EDateLabel.innerHTML = 'Eind datum: ' + researches[i].endDate;
 		var button = createElement('button', 'btn btn-warning');
 		button.id = i;
 		button.innerHTML = 'Surveys';
@@ -107,15 +95,6 @@ function showResearches(researches) {
 		
 		container.appendChild(heroDiv);
 		
-//		panelHeading.appendChild(panelTitle);
-//		panelDiv.appendChild(panelHeading);
-//		panelDiv.appendChild(panelBody);
-//		//formGroup.appendChild(statusLabel);
-//		formGroup.appendChild(BDateLabel);
-//		formGroup.appendChild(EDateLabel);
-//		formGroup.appendChild(button);
-//		panelBody.appendChild(formGroup);
-//		container.appendChild(panelDiv);
 	}
 }
 
@@ -134,19 +113,8 @@ function showSurveyPanels(surveysJson) {
 	var container = document.getElementById('surveys');
 	
 	for (i = 0; i < surveysJson.length; i++) {
-		var panelDiv = createElement('div', 'panel panel-primary');
-		var panelHeading = createElement('div', 'panel-heading');
-		var panelTitle = createElement('h3', 'panel-title');
-			panelTitle.innerHTML = surveysJson[i].name;
-		var panelBody = createElement('div', 'panel-body');
-		var formGroup = createElement('div', 'form-group');
-		//var statusLabel = createElement('label', 'control-label col-sm-8');
-		//	statusLabel.innerHTML = 'Status: ' + surveysJson[i].status;
-		var BDateLabel = createElement('label', 'control-label col-sm-8');
-			BDateLabel.innerHTML = 'Begin datum: ' + surveysJson[i].beginDate;
-		var EDateLabel = createElement('label', 'control-label col-sm-8');
-			EDateLabel.innerHTML = 'Eind datum: ' + surveysJson[i].endDate;
-		var button = createElement('button', 'btn btn-success');
+			
+		var button = createElement('button', 'btn btn-warning');
 		button.id = surveysJson[i].id;
 		button.innerHTML = 'Resultaten';
 		
@@ -154,18 +122,28 @@ function showSurveyPanels(surveysJson) {
 			var id = event.target.id;
 			console.log(id);
 			window.location.assign('http://92.109.52.61:7070/NTR_application/rest/answer/' + id);
-			//getResults(id);
 		});
 		
-		panelHeading.appendChild(panelTitle);
-		panelDiv.appendChild(panelHeading);
-		panelDiv.appendChild(panelBody);
-		//formGroup.appendChild(statusLabel);
-		formGroup.appendChild(BDateLabel);
-		formGroup.appendChild(EDateLabel);
-		formGroup.appendChild(button);
-		panelBody.appendChild(formGroup);
-		container.appendChild(panelDiv);
+		var heroDiv = createElement('div', 'col-md-3 col-sm-6 hero-feature');
+		var heroThumb = createElement('div', 'thumbnail');
+		
+		var caption = createElement('div', 'caption');
+		var header = createElement('h3', '');
+			header.innerHTML = surveysJson[i].name;
+		var bdate = createElement('p', '');
+			bdate.innerHTML = 'Begindatum: ' + surveysJson[i].beginDate;
+		var edate = createElement('p', '');
+			edate.innerHTML = 'Einddatum: ' + surveysJson[i].endDate;
+			
+		heroDiv.appendChild(heroThumb);
+		heroThumb.appendChild(caption);
+		caption.appendChild(header);
+		caption.appendChild(bdate);
+		caption.appendChild(edate);
+		caption.appendChild(button);
+
+		container.appendChild(heroDiv);
+		
 	}
 }
 
